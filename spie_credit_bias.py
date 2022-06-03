@@ -62,30 +62,6 @@ mydata_orig = mydata.copy()
 
 mydata.columns
 
-"""### Create Synthetic data
-Create column for Criminal, and Eyeglasses where 1 denotes Yes and 0 denotes No.
-"""
-
-# from random import randint, choice
-# import random
-
-# criminal = []
-# eyeglasses = []
-
-# def generate_rand():
-#   return random.randint(0,1)
-    
-# for i in range(mydata.shape[0]):
-#   c = generate_rand()
-#   criminal.append(c)
-
-# for i in range(mydata.shape[0]):
-#   e = generate_rand()
-#   eyeglasses.append(e)
-
-# mydata['Criminal'] = criminal
-# mydata['Eyeglasses'] = eyeglasses
-
 """### Rename columns
 Rename columns to represent new synthetic data. 
 """
@@ -131,21 +107,6 @@ Display the features with the percentage of missing values in each of them.
 print('Number total of rows : '+ str(mydata.shape[0]))
 print_missing_values(mydata)
 
-"""### Add a synthetic data to a missing Age value
-Add synthetic value to the Person Age as Age needs to be converted into numeric value and cannot be empty.
-"""
-
-# index = mydata[mydata['Person Age'] == ' '].index.tolist()
-# mydata.loc[index, 'Person Age'] = '0'
-
-"""### Create Category for Age
-Create categorical feature 'Perpetrator Age Category' by splitting age into three categories. 
-"""
-
-# mydata['Person Age'] = pd.to_numeric(mydata['Person Age'])
-# a = mydata.loc[index, 'Person Age']
-# print(a)
-
 """### Numerical and Categorical Features
 In the code below, we split the features used to train the model to split into numerical and categorical category. All the integers are categorized as numerical feature and all rest are categorized as categorical feature. 
 """
@@ -177,8 +138,6 @@ print("Median values for each Numerical features \n\n", median_val)
 As each features have missing datas in it, these missing values should be replaced before we can train the model. These missing values are replaced by median value generatead in the previous code for numerical features. Missing values for categorical features should be replaced by "Missing value".
 """
 
-# mydata.loc[index, 'Person Age'] = np.nan
-
 def handle_missing_values(data, median_val):
     df = data.copy()
     for col in df:
@@ -190,9 +149,6 @@ def handle_missing_values(data, median_val):
     return df
 
 mydata = handle_missing_values(mydata, median_val)
-
-# mydata['Person Age category'] = np.where(mydata['Person Age'] > 64, 'Elder', np.where(mydata['Person Age'] < 25, 'Young', 'Adult'))
-
 mydata.head(10)
 
 """### Display function
@@ -230,9 +186,6 @@ target_distribution(y_var=var, data=mydata)
 
 """### One hot encoding 
 Categorical variables are not readable to ML algorithms. Hence, it is necessary to convert them into integer based binary format.
-
-
-
 """
 
 def label_encode(data, categorical_features):
